@@ -1,0 +1,11 @@
+[Unit]
+Description=Auto Fan Control
+
+[Service]
+ExecStart=/usr/local/bin/AutoFanCtrl
+Restart=always
+User=root
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

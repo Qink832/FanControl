@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto Fan Control
+
+[Service]
+Environment="LD_LIBRARY_PATH=//usr/local/Ascend/ascend-toolkit/latest/lib64:usr/local/Ascend/driver/lib64/driver:$LD_LIBRARY_PATH"
+ExecStart=/usr/local/bin/AutoFanCtrl
+Restart=always
+User=root
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
