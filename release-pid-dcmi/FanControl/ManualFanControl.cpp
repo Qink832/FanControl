@@ -72,6 +72,8 @@ CPU_END:
     cout << "Mainboard Temperature:" << recvBuf << endl;
 
 SYS_END:
+    ret = dcmi_init();
+    IF_COND_FAIL(ret == 0, (string("[ERROR] Failed to obtain the device ID list, dcmi_get_card_num_list error code: ") + to_string(ret)), return -1);
 
     ret = dcmi_get_card_num_list(&device_count, card_id_list, 8);
     IF_COND_FAIL(ret == 0, (string("[ERROR] Failed to obtain the device ID list, dcmi_get_card_num_list error code: ") + to_string(ret)), return -1);
@@ -108,7 +110,9 @@ int GetPower(const int fd)
     cout << "CPU Power: \n" << recvBuf << endl;
 
 CPU_END:
-
+    ret = dcmi_init();
+    IF_COND_FAIL(ret == 0, (string("[ERROR] Failed to obtain the device ID list, dcmi_get_card_num_list error code: ") + to_string(ret)), return -1);
+    
     ret = dcmi_get_card_num_list(&device_count, card_id_list, 8);
     IF_COND_FAIL(ret == 0, (string("[ERROR] Failed to obtain the device ID list, dcmi_get_card_num_list error code: ") + to_string(ret)), return -1);
 
@@ -343,13 +347,6 @@ FILE_OK:
         return ret;
     }
 
-    ret = dcmi_init();
-    if(ret != 0)
-    {
-        cout << "[ERROR] Fail to init dcmi, error code: " << ret << endl;
-        return ret;
-    }
-
     if(string(argv[1]) == "-h")
     {
         ret = GetHelp();
@@ -382,8 +379,8 @@ FILE_OK:
     else if (string(argv[1]) == "-v")
     {
         cout << "Type: PID_DCMI" << endl;
-        cout << "Version: 1.0.0" << endl;
-        cout << "Time: 2025.7.23" << endl;
+        cout << "Version: 1.0.1" << endl;
+        cout << "Time: 2025.8.5" << endl;
     }
     else if(string(argv[1]) == "-r")
     {
