@@ -1,0 +1,3 @@
+cat install.sh FanControl.tar.gz > FanControlInstaller_pid_ioctl_dcmi_ctyun_kylin.run
+chmod +x FanControlInstaller_pid_ioctl_dcmi_ctyun_kylin.run
+md5sum FanControlInstaller_pid_ioctl_dcmi_ctyun_kylin.run > FanControlInstaller_pid_ioctl_dcmi_ctyun_kylin.run.md5
