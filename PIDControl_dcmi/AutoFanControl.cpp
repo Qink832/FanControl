@@ -133,12 +133,14 @@ int main()
     int                     cardList[8] = {0};
     vector<CardController>  cardCtrlVec;
 
+    cpuCtrl.SetPwm();
+    sysCtrl.SetPwm();
+
     ret = dcmi_init();
-    IF_COND_FAIL(ret == 0, "[ERROR] dcmi_init fail, process exit", return -1;);
+    IF_COND_FAIL(ret == 0 || ret == 8005, ("[ERROR] dcmi_init fail, ret is" + to_string(ret) + ", process exit").data(), return -1;);
 
     ret = dcmi_get_card_list(&cardNum, cardList, 8);
-    //TODO 8005跳过
-    IF_COND_FAIL(ret == 0, "[ERROR] dcmi_get_card_list fail, process exit", return -1;);
+    IF_COND_FAIL(ret == 0 || ret == 8005, ("[ERROR] dcmi_get_card_list fail, ret is" + to_string(ret) + ", process exit").data(), return -1;);
 
     // cout << "[INFO] card_num is " << cardNum << endl;
 

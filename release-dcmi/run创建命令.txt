@@ -1,2 +1,0 @@
-cat install.sh FanControl.tar.gz > FanControlInstaller_dcmi_ctyun_kylin.run
-chmod +x FanControlInstaller_dcmi_ctyun_kylin.run

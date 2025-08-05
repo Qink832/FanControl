@@ -210,7 +210,6 @@ int SysController::CalcPwm(float& curTemp)
     
     m_prevError = error;
     m_lastTime = now;
-    syslog(LOG_INFO, "[DEBUG] SYS calc pwm is %d !!!!!!!", pwm);
     return pwm;
 }
 
@@ -230,11 +229,10 @@ void SysController::SetPwm()
     cardData.fan_num = 2;
     cardData.fan_mode = DEFAULT_FAN_MODE;
     cardData.duty = Pwm2Duty(pwm);
-    syslog(LOG_INFO, "[DEBUG] SYS duty is %d !!!!!!!", cardData.duty);
     ret = ExecCommand(IOC_COMMAND_SET, &cardData);
     IF_COND_FAIL(ret == 0, "[ERROR] Fail to set system pwm !!!", return;);
     m_curPwm = pwm;
-    syslog(LOG_INFO, "[INFO] Set system pwm success, temperatrue: %d, current pwm is %d.", curTemp, pwm);
+    syslog(LOG_INFO, "[INFO] Set system pwm success, temperatrue: %f, current pwm is %d.", curTemp, pwm);
 }
 
 // CardController 成员函数

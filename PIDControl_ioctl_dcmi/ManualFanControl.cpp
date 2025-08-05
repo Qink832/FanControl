@@ -267,10 +267,10 @@ int GetRpm(int fd)
 CPU_END:
 
     ret = ExecCommand(fd, IOC_COMMAND_RPM, &sysRpm);
-    IF_COND_FAIL(ret == 0, "[ERROR] Failed to get the sys fan speed.", goto CARD_1_END);
+    IF_COND_FAIL(ret == 0, "[ERROR] Failed to get the sys fan speed.", goto SYS_END);
     cout << "System Fan Speed:" << sysRpm << "\n" << endl;
 
-CARD_1_END:
+SYS_END:
 
     ret = ExecCommand(fd, IOC_COMMAND_RPM, &cardRpm);
     IF_COND_FAIL(ret == 0, "[ERROR] Failed to get the AI_CARDS fan speed.", return -1);
@@ -428,9 +428,9 @@ FILE_OK:
     }
     else if (string(argv[1]) == "-v")
     {
-        cout << "Type: PID_X86" << endl;
+        cout << "Type: PID_X86_SYSFAN" << endl;
         cout << "Version: 1.0.0" << endl;
-        cout << "Time: 2025.8.4" << endl;
+        cout << "Time: 2025.8.5" << endl;
     }
     else
     {
