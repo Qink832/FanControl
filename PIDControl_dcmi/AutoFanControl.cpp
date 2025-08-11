@@ -133,6 +133,7 @@ int main()
     int                     cardList[8] = {0};
     vector<CardController>  cardCtrlVec;
 
+    // 先开cpu和sys的风扇
     cpuCtrl.SetPwm();
     sysCtrl.SetPwm();
 

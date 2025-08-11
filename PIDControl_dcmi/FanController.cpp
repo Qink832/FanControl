@@ -34,22 +34,24 @@
 #define THRV_KP 7.5
 #define THRV_KI 0.5
 #define THRV_KD 0.1
-#define THRV_INTEGRAL 0
 #define THRV_MAX_POWER 720    //单位：0.1W
 
 // 300I Pro
 #define THRIPRO_KP 7.5
 #define THRIPRO_KI 0.5
 #define THRIPRO_KD 0.1
-#define THRIPRO_INTEGRAL 0
 #define THRIPRO_MAX_POWER 720    //单位：0.1W
 
 // 300I Duo
 #define THRIDUO_KP 7.5
 #define THRIDUO_KI 0.5
 #define THRIDUO_KD 0.1
-#define THRIDUO_INTEGRAL 0
 #define THRIDUO_MAX_POWER 1500    //单位：0.1W
+
+// unkown
+#define DEFAULT_KP 7.5
+#define DEFAULT_KI 0.5
+#define DEFAULT_KD 0.1
 
 int g_cardDangFlag = 0;
 
@@ -191,7 +193,7 @@ int FanController::CalcPwm(int& curTemp)
 CPUController::CPUController(int fd)
     : FanController(CPU_KP, CPU_KI, CPU_KD, CPU_INTEGRAL, fd) 
 {
-    
+    // SetPwm();
 }
 
 int CPUController::ReadTemp()
@@ -267,7 +269,7 @@ void CPUController::SetPwm()
 SysController::SysController(int fd)
     : FanController(SYS_KP, SYS_KI, SYS_KD, SYS_INTEGRAL, fd) 
 {
-    
+    // SetPwm();
 }
 
 int SysController::ReadTemp()
@@ -346,12 +348,18 @@ CardController::CardController(int fd, int cardId)
         m_ki = THRIPRO_KI;
         m_kd = THRIPRO_KD;
     }
-    else
+    else if (m_proType == "Atlas 300V")
     {
-        // 300V
         m_kp = THRV_KP;
         m_ki = THRV_KI;
         m_kd = THRV_KD;
+    }
+    else
+    {
+        //unkown
+        m_kp = DEFAULT_KP;
+        m_ki = DEFAULT_KI;
+        m_kd = DEFAULT_KD;
     }
 }
 

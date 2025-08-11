@@ -36,7 +36,7 @@ int ExecCommand(int serialFd, const char* cmd, char* recvBuf, int recvBufLen)
     int ret = write(serialFd, cmd, strlen(cmd));
     IF_COND_FAIL(ret >= 0, (string("[ERROR] Failed to write the command. cmd: ") + cmd), return ret;);
 
-    usleep(200000); //200ms
+    usleep(500000); //500ms
     memset(recvBuf, 0, recvBufLen);
 
     ret = read(serialFd, recvBuf, recvBufLen);
